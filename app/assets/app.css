@@ -1,0 +1,101 @@
+html, body {
+  font-family: 'Roboto', sans-serif;
+  font-size:14px;
+  height:100%;
+  margin: 0px;
+  padding: 0px;
+}
+body,
+body > div {
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+body > div {
+    height: 100%;
+}
+.bg-image {
+    background-image: url('images/logo-igreja.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.nav-header {
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+.nav-header h1,
+.nav-header h4 {
+    color: white;
+    text-align: center;
+}
+
+.nav-header a.logo {
+    text-decoration: none;
+}
+.full-heigth {
+    height: -moz-calc(100% - 64px);
+    height: -webkit-calc(100% - 64px);
+    height: calc(100% - 64px);
+}
+
+.dialog-95 {
+    width: 95%;
+    height: auto;
+}
+
+.maginl1{
+  margin-left: 1% !important;
+}
+.opacity80{
+  opacity: 0.8;
+}
+
+
+.searchToolbar div.md-toolbar-tools md-input-container{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-x: hidden;
+  padding: 2px 2px 26px;
+}
+
+.searchToolbar div.md-toolbar-tools md-input-container input::-webkit-input-placeholder {
+   color: #1C4E5E;
+}
+
+.searchToolbar div.md-toolbar-tools md-input-container input:-moz-placeholder {
+   color: #1C4E5E;
+}
+
+.searchToolbar div.md-toolbar-tools md-input-container input::-moz-placeholder {
+   color: #1C4E5E;
+}
+
+.searchToolbar div.md-toolbar-tools md-input-container input:-ms-input-placeholder {
+   color: #1C4E5E;
+}
+.full-width{
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.marginAll16 {
+    margin: 16px;
+}
+.profilePicThumb{
+}
+.profilePic{
+  height: 160px;
+  width: 160px;
+  background-color: #fff;
+  border: 4px solid #fff;
+  border-radius: 2px;
+
+}

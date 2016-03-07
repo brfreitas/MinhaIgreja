@@ -1,29 +1,72 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
-<head>
-    <title>Customer Manager</title>
+<html lang="en" >
+  <head>
+    <title>Angular Material - Starter App</title>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <!-- build:css assets/css/app.css -->
-    <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <!-- endbuild -->
-</head>
-<body>
-    <ng-view></ng-view>
-    <!-- build:js scripts/vendor.js -->
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-route/angular-route.js"></script>
-    <script src="../bower_components/angular-animate/angular-animate.js"></script>
-    <script src="../bower_components/angular-aria/angular-aria.js"></script>
-    <script src="../bower_components/angular-material/angular-material.js"></script>
-    <!-- endbuild -->
-    <!-- build:app scripts/app.js -->
-    <script src="./scripts/app.js"></script>
-    <script src="./scripts/customer/customerService.js"></script>
-    <script src="./scripts/customer/customerController.js"></script>
-    <!-- endbuild -->
-</body>
+    <script>document.write('<base href="' + __dirname + '\\" />');</script>
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="../bower_components/angular-material-sidenav/angular-material-sidenav.css"/>
+    <link rel="stylesheet" href="../bower_components/mdPickers/dist/mdPickers.css"/>
+    <link rel="stylesheet" href="assets/app.css"/>
+
+    <style type="text/css">
+        /**
+         * Hide when Angular is not yet loaded and initialized
+         */
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+          display: none !important;
+        }
+    </style>
+
+  </head>
+
+  <body ng-app="minhaIgrejaApp" layout="row" ng-cloak >
+
+    <div ui-view='allContent' layout="row" flex></div>
+
+
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-cookies/angular-cookies.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-messages/angular-messages.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-touch/angular-touch.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-material-sidenav/angular-material-sidenav.js"></script>
+    <script type="text/javascript" src="../bower_components/mdPickers/dist/mdPickers.js"></script>
+    <script type="text/javascript" src="../bower_components/moment/moment.js"></script>
+    <script type="text/javascript" src="../bower_components/lodash/dist/lodash.js"></script>
+    <script type="text/javascript" src="./src/utils/lodashService.js"></script>
+    <script type="text/javascript" src="./src/memberships/Memberships.js"></script>
+    <script type="text/javascript" src="./src/memberships/MembershipController.js"></script>
+    <script type="text/javascript" src="./src/memberships/edit/MembershipEditController.js"></script>
+    <script type="text/javascript" src="./src/memberships/MembershipService.js"></script>
+    <script type="text/javascript" src="./src/dashboards/Dashboards.js"></script>
+    <script type="text/javascript" src="./src/dashboards/DashboardController.js"></script>
+    <script type="text/javascript" src="./src/components/Auth/user.service.js"></script>
+    <script type="text/javascript" src="./src/components/Auth/authinterceptor.service.js"></script>
+    <script type="text/javascript" src="./src/components/Auth/auth.service.js"></script>
+    <script type="text/javascript" src="./src/components/customControls/customControls.js"></script>
+    <script type="text/javascript" src="./src/components/customControls/toolbarSearch/toolbarSearch.js"></script>
+    <script type="text/javascript" src="./src/components/customControls/toolbarEdit/toolbarEdit.js"></script>
+    <script type="text/javascript" src="./src/login/login.js"></script>
+    <script type="text/javascript" src="./src/login/login.controller.js"></script>
+    <script type="text/javascript" src="./src/App.js"></script>
+    <script type="text/javascript" src="./src/AppController.js"></script>
+
+
+    </script>
+
+  </body>
 </html>

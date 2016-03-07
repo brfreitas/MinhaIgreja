@@ -1,8 +1,9 @@
 // Module to control application life.
-var app = require('app'); 
+var electron = require('electron');
+var app = electron.app;//require('app');
 
 // Module to create native browser window.
-var BrowserWindow = require('browser-window');
+var BrowserWindow = electron.BrowserWindow;
 
 var mainWindow = null;
 
@@ -18,10 +19,14 @@ app.on('window-all-closed', function () {
 // initialization and is ready to create browser windows.
 app.on('ready', function () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 800, height: 600 });
+  var electronScreen = electron.screen;
+  var size = electronScreen.getPrimaryDisplay().workAreaSize;
+  var iconUrl = __dirname + '/assets/images/icon.png';
+  mainWindow = new BrowserWindow({ width: size.width, height: size.height, icon: iconUrl });
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow.webContents.openDevTools();
 
   // Open the devtools.
   // mainWindow.openDevTools();

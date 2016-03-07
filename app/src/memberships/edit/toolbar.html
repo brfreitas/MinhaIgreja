@@ -1,0 +1,11 @@
+
+<md-button class="md-icon-button" ng-click="vm.back()">
+  <md-icon md-svg-icon="arrow-left" aria-label="Voltar"></md-icon>
+  <md-tooltip md-delay="1500" md-autohide="true">Voltar</md-tooltip>
+</md-button>
+<h2>{{vm.operation}} Membro</h2>
+<span flex></span>
+<md-button class="md-icon-button" ng-click="vm.save()" ng-show="vm.operation === 'Nova' || vm.operation === 'Editar'" ng-disabled="inputForm.$invalid">
+  <md-icon md-svg-icon="content-save" aria-label="Salvar"></md-icon>
+  <md-tooltip md-delay="1500" md-autohide="true">Salvar</md-tooltip>
+</md-button>

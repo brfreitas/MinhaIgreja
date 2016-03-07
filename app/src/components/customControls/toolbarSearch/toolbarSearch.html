@@ -1,0 +1,46 @@
+<md-toolbar ng-show="!showSearch">
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button"
+        aria-label="Menu Button"
+        hide-gt-md
+        ng-click="appCtrl.onClickMenu();">
+        <md-icon
+            md-svg-icon="menu"
+            aria-label="Menu Icon">
+        </md-icon>
+    </md-button>
+    <h2>{{title}}</h2>
+    <span flex></span>
+    <md-button aria-label="Pesquisar" ng-click="showSearch = !showSearch">
+      <md-icon
+          md-svg-icon="magnify"
+          aria-label="Pesquisar">
+      </md-icon>
+    </md-button>
+
+  </div>
+</md-toolbar>
+<md-toolbar class="md-hue-1 searchToolbar" ng-show="showSearch">
+  <div class="md-toolbar-tools">
+    <md-button ng-click="showSearch = !showSearch" aria-label="Voltar">
+      <md-icon
+          md-svg-icon="arrow-left"
+          aria-label="Voltar">
+      </md-icon>
+    </md-button>
+    <h3 flex="10">
+      Voltar
+    </h3>
+    <md-input-container md-theme="input" flex>
+      <label>&nbsp;</label>
+      <input ng-model="search" placeholder="Persquisar">
+    </md-input-container>
+    <md-button aria-label="Pesquisar" ng-click="showSearch = !showSearch">
+      <md-icon
+          md-svg-icon="magnify"
+          aria-label="Pesquisar">
+      </md-icon>
+    </md-button>
+  </div>
+
+</md-toolbar>

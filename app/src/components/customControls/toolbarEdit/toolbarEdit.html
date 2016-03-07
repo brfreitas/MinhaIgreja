@@ -1,0 +1,25 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button"
+        aria-label="Menu Button"
+        hide-gt-md
+        ng-click="appCtrl.onClickMenu();">
+        <md-icon
+            md-svg-icon="menu"
+            aria-label="Menu Icon">
+        </md-icon>
+    </md-button>
+
+    <md-button class="md-icon-button" ng-click="back()">
+      <md-icon md-svg-icon="arrow-left" aria-label="Voltar"></md-icon>
+      <md-tooltip md-delay="1500" md-autohide="true">Voltar</md-tooltip>
+    </md-button>
+    <h2>{{title}}</h2>
+    <span flex></span>
+    <md-button class="md-icon-button" ng-click="save()" ng-show="operationType === 'N' || operationType === 'U'" ng-disabled="formValidator">
+      <md-icon md-svg-icon="content-save" aria-label="Salvar"></md-icon>
+      <md-tooltip md-delay="1500" md-autohide="true">Salvar</md-tooltip>
+    </md-button>
+
+  </div>
+</md-toolbar>

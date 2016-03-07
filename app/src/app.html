@@ -1,0 +1,18 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-z2"
+    md-component-id="left"
+    md-is-locked-open="$mdMedia('gt-md')">
+
+    <header class="nav-header" ss-style-color="{'background-color': 'primary.default'}">
+        <a ui-sref="app.dashboard" class="logo">
+            <h1 class="md-heading"><img src="assets/images/logo-denominacao.png"/></h1>
+        </a>
+    </header>
+
+    <md-content flex role="navigation" ss-style-color="{'background-color': 'primary.default'}">
+        <ss-sidenav flex menu="appCtrl.menu"></ss-sidenav>
+    </md-content>
+</md-sidenav>
+
+<div layout="column" flex role="main" class="bg-image">
+  <div ui-view='mainView' layout="column" layout-fill class="opacity80"></div>
+</div>

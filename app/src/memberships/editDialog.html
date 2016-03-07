@@ -1,0 +1,54 @@
+<md-dialog aria-label="Editar" class="dialog-95">
+    <form name="inputForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" ng-click="dialogCtrl.back()">
+                    <md-icon md-svg-icon="arrow-left" aria-label="Voltar"></md-icon>
+                    <md-tooltip md-delay="1500" md-autohide="true">Voltar</md-tooltip>
+                </md-button>
+                <h2>{{dialogCtrl.operation}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="dialogCtrl.save()" ng-show="dialogCtrl.operation === 'Cadastrar' || dialogCtrl.operation === 'Editar'" ng-disabled="inputForm.$invalid">
+                    <md-icon md-svg-icon="content-save" aria-label="Salvar"></md-icon>
+                    <md-tooltip md-delay="1500" md-autohide="true">Salvar</md-tooltip>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-content layout-padding ng-cloak>
+                <md-input-container class="md-block">
+                    <label>Titulo</label>
+                    <input type="text" name="title" required md-maxlength="100" ng-model="dialogCtrl.selectedItem.title" />
+                    <ng-messages for="inputForm.title.$error">
+                        <ng-message when="required">O título é obrigatório </ng-message>
+                        <ng-message when="md-maxlength">Não é permitido mais de 100 caracteres</ng-message>
+                    </ng-messages>
+                </md-input-container>
+                <md-input-container class="md-block">
+                     <label>Descrição</label>
+                     <textarea rows="5" name="description" md-maxlength="200" ng-model="dialogCtrl.selectedItem.description"></textarea>
+                     <ng-messages for="inputForm.description.$error">
+                         <ng-message when="md-maxlength">Não é permitido mais de 200 caracteres</ng-message>
+                     </ng-messages>
+                 </md-input-container>
+                 <div layout="row">
+                   <h2>Fildsets</h2>
+                   <md-icon aria-label="Novo fielset" class="md-secondary maginl1" md-svg-icon="plus-box" ng-click="dialogCtrl.showAddFieldSetForm()"></md-icon>
+                 </div>
+                 <div id="fieldSetForm">
+                   
+                 </div>
+                 <md-list>
+                   <md-list-item class="md-3-line" ng-repeat="element in dialogCtrl.selectedItem.fieldsets">
+                       <div class="md-list-item-text">
+                           <h3>{{element.title}}</h3>
+                       </div>
+                       <md-icon aria-label="Editar" class="md-secondary" md-svg-icon="pencil" ng-click="vm.showDialogForm('UD', element, $event)"></md-icon>
+                       <md-divider></md-divider>
+                   </md-list-item>
+                 </md-list>
+
+            </md-content>
+        </md-dialog-content>
+    </form>
+</md-dialog>
