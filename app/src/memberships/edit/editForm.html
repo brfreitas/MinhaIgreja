@@ -1,187 +1,282 @@
-<toolbar-edit title="{{vm.title}}" save="vm.save()" back="vm.back()" operation-type="vm.operationType" form-validator="inputForm.$invalid" ></toolbar-edit>
+<toolbar-edit title="{{vm.title}}" save="vm.save(inputForm)" back="vm.back()" operation-type="vm.operationType" form-validator="inputForm.$invalid"></toolbar-edit>
 <md-content class="layout-padding" flex>
   <form name="inputForm" novalidate>
     <div class="md-whiteframe-z1 marginAll16">
-        <md-toolbar class="md-cyan-theme">
-            <div class="md-toolbar-tools">
-                <h2>Dados pessoais</h2>
+      <md-toolbar class="md-cyan-theme">
+        <div class="md-toolbar-tools">
+          <h2>Dados pessoais</h2>
+        </div>
+      </md-toolbar>
+      <md-content layout-padding ng-cloak>
+        <div layout="row">
+          <div class="profile-pic text-center">
+            <a class="tabbed-pane-header-image profile-image ed js-change-avatar-profile" href="#" ngf-select accept="image/*" ng-model="vm.tempData.picFile" ngf-change="vm.fileSelected($files, $file, $event, $rejectedFiles)">
+              <img ngf-src="vm.tempData.picFile" class="profile-image-image" alt="">
+              <span class="change-text">
+                <md-icon aria-label="Alterar foto" class="md-secondary" md-svg-icon="camera" style="color: #fff"></md-icon>
+                Alterar foto
+              </span>
+            </a>
+          </div>
+          <div flex>
+            <div layout-gt-xs="row">
+              <md-input-container class="md-block requiredAsterisk" flex-gt-xs>
+                <label class="">Nome</label>
+                <input type="text" name="name" required md-maxlength="100" maxlength="100" ng-model="vm.tempData.p_name"/>
+                <ng-messages for="inputForm.name.$error">
+                  <ng-message when="required">
+                    O Nome é obrigatório
+                  </ng-message>
+                  <ng-message when="md-maxlength">
+                    Não é permitido mais de 100 caracteres
+                  </ng-message>
+                </ng-messages>
+              </md-input-container>
+              <md-input-container class="requiredAsterisk">
+                <label>Data de nascimento</label>
+                <input type="date" mdp-date-picker name="birthday" ng-model="vm.tempData.p_birthday" required/>
+                <ng-messages for="inputForm.birthday.$error">
+                  <ng-message when="required">
+                    A data de nasc. é obrigatória
+                  </ng-message>
+                </ng-messages>
+              </md-input-container>
             </div>
-        </md-toolbar>
-        <md-content layout-padding ng-cloak>
-          <div layout="row">
-            <div class="profilePicThumb">
-              <img src="assets/images/foto.png" />
+            <div layout-gt-xs="row">
+              <md-input-container class="md-block requiredAsterisk" flex-gt-xs>
+                <label>RG</label>
+                <input type="text" name="rg" required maxlength="50" ng-model="vm.tempData.p_rg"/>
+                <ng-messages for="inputForm.rg.$error">
+                  <ng-message when="required">
+                    O RG é obrigatório
+                  </ng-message>
+                  <ng-message when="md-maxlength">
+                    Não é permitido mais de 50 caracteres
+                  </ng-message>
+                </ng-messages>
+              </md-input-container>
+              <md-input-container class="md-block requiredAsterisk" flex-gt-xs>
+                <label>CPF</label>
+                <input type="text" name="cpf" required maxlength="14" ng-model="vm.tempData.p_cpf" ui-br-cpf-mask/>
+                <ng-messages for="inputForm.cpf.$error">
+                  <ng-message when="required">
+                    O CPF é obrigatório
+                  </ng-message>
+                  <ng-message when="md-maxlength">
+                    Não é permitido mais de 14 caracteres
+                  </ng-message>
+                  <div ng-show="inputForm.cpf.$error.cpf">
+                    CPF inválido
+                  </div>
+                </ng-messages>
+              </md-input-container>
+
+              <md-autocomplete class="requiredAsterisk" md-input-name="maritalStatus" md-selected-item="vm.tempData.maritalStatus" md-search-text="vm.searchTextMaritalStatus" md-items="item in vm.querySearchMaritalStatus(vm.searchTextMaritalStatus)" md-item-text="item.description" md-min-length="0" md-floating-label="Estado Civil" required force-select>
+                <md-item-template>
+                  <span md-highlight-text="vm.searchTextMaritalStatus" md-highlight-flags="^i">{{item.description}}</span>
+                </md-item-template>
+                <ng-messages for="inputForm.maritalStatus.$error">
+                  <ng-message when="selectValidValue">
+                    Selecione um Estado Civil válido
+                  </ng-message>
+                  <ng-message when="required">
+                    O Estado Civil é obrigatório
+                  </ng-message>
+                </ng-messages>
+              </md-autocomplete>
+
             </div>
-            <div>
-              <div layout-gt-xs="row">
-                <md-input-container class="md-block" flex-gt-xs>
-                  <label>Nome</label>
-                  <input type="text" name="name" required md-maxlength="100" maxlength="100" ng-model="vm.tempData.name"/>
-                  <ng-messages for="inputForm.name.$error">
-                    <ng-message when="required">
-                      O Nome é obrigatório
-                    </ng-message>
-                    <ng-message when="md-maxlength">
-                      Não é permitido mais de 100 caracteres
-                    </ng-message>
-                  </ng-messages>
-                </md-input-container>
-                <md-input-container>
-                  <label>Data dew nascimento</label>
-                  <input type="date" mdp-date-picker ng-model="vm.tempData.birthday" />
-                </md-input-container>
-              </div>
-              <div layout-gt-xs="row">
-                <md-input-container class="md-block" flex-gt-xs>
-                  <label>RG</label>
-                  <input type="text" name="rg" required maxlength="50" ng-model="vm.tempData.rg"/>
-                  <ng-messages for="inputForm.rg.$error">
-                    <ng-message when="required">
-                      O Nome é obrigatório
-                    </ng-message>
-                    <ng-message when="md-maxlength">
-                      Não é permitido mais de 50 caracteres
-                    </ng-message>
-                  </ng-messages>
-                </md-input-container>
-                <md-input-container class="md-block" flex-gt-xs>
-                  <label>CPF</label>
-                  <input type="text" name="cpf" required maxlength="14" ng-model="vm.tempData.cpf"/>
-                  <ng-messages for="inputForm.cpf.$error">
-                    <ng-message when="required">
-                      O Nome é obrigatório
-                    </ng-message>
-                    <ng-message when="md-maxlength">
-                      Não é permitido mais de 14 caracteres
-                    </ng-message>
-                  </ng-messages>
-                </md-input-container>
-                <md-input-container class="md-block" flex-gt-xs>
-                  <label>Estado Civil</label>
-                  <md-select ng-model="vm.tempData.maritalStatus">
-                    <md-option ng-repeat="item in vm.maritalStatus" value="{{item.value}}">
-                      {{item.description}}
-                    </md-option>
-                  </md-select>
-                </md-input-container>
-              </div>
+            <div class="requiredAsterisk" layout="column">
+              <label>Gênero</label>
+              <md-radio-group ng-model="vm.tempData.p_gender" layout="row" ng-required="true">
+                <md-radio-button value="F" class="md-primary">Feminino</md-radio-button>
+                <md-radio-button value="M" class="md-primary">Masculino</md-radio-button>
+              </md-radio-group>
             </div>
           </div>
-        </md-content>
+        </div>
+      </md-content>
     </div>
     <div class="md-whiteframe-z1 marginAll16">
-        <md-toolbar class="md-cyan-theme">
-            <div class="md-toolbar-tools">
-                <h2>Endereço e telefone</h2>
-            </div>
-        </md-toolbar>
-        <md-content layout-padding ng-cloak>
-          <div layout-gt-xs="row">
-            <md-input-container class="md-block" flex-gt-xs>
-              <label>Logradouro</label>
-              <input type="text" name="place" required md-maxlength="100" maxlength="100" ng-model="vm.tempData.address.place"/>
-              <ng-messages for="inputForm.place.$error">
-                <ng-message when="required">
-                  O Numero é obrigatório
-                </ng-message>
-                <ng-message when="md-maxlength">
-                  Não é permitido mais de 100 caracteres
-                </ng-message>
-              </ng-messages>
-            </md-input-container>
-            <md-input-container>
-              <label>Numero</label>
-              <input type="text" name="number" required maxlength="6" ng-model="vm.tempData.address.number"/>
-              <ng-messages for="inputForm.number.$error">
-                <ng-message when="required">
-                  O Numero é obrigatório
-                </ng-message>
-              </ng-messages>
-            </md-input-container>
-            <md-input-container>
-              <label>Complemento</label>
-              <input type="text" name="complement" required  maxlength="10" ng-model="vm.tempData.address.complement"/>
-              <ng-messages for="inputForm.complement.$error">
-                <ng-message when="required">
-                  O Complemento é obrigatório
-                </ng-message>
-              </ng-messages>
-            </md-input-container>
-          </div>
-          <div layout-gt-xs="row">
-            <md-input-container class="md-block" flex-gt-xs>
-              <label>Bairro</label>
-              <input type="text" name="neighborhood" required maxlength="50" ng-model="vm.tempData.address.neighborhood"/>
-              <ng-messages for="inputForm.neighborhood.$error">
-                <ng-message when="required">
-                  O Bairro é obrigatório
-                </ng-message>
-                <ng-message when="md-maxlength">
-                  Não é permitido mais de 50 caracteres
-                </ng-message>
-              </ng-messages>
-            </md-input-container>
-            <md-input-container class="md-block" flex-gt-xs>
-              <label>Cidade</label>
-              <input type="text" name="city" required maxlength="50" ng-model="vm.tempData.address.city"/>
-              <ng-messages for="inputForm.city.$error">
-                <ng-message when="required">
-                  O Nome é obrigatório
-                </ng-message>
-                <ng-message when="md-maxlength">
-                  Não é permitido mais de 14 caracteres
-                </ng-message>
-              </ng-messages>
-            </md-input-container>
-            <md-input-container  class="md-block" flex-gt-xs>
-              <label>Estado</label>
-              <md-select ng-model="vm.tempData.address.state">
-                <md-option ng-repeat="item in vm.states" value="{{item.value}}">
-                  {{item.description}}
-                </md-option>
-              </md-select>
-            </md-input-container>
-          </div>
-          <div layout-gt-xs="row">
-            <md-input-container class="md-block" flex-gt-xs>
-              <label>Telefone</label>
-              <input type="text" name="phone1"  maxlength="11" ng-model="vm.tempData.phone1"/>
-            </md-input-container>
-            <md-input-container class="md-block" flex-gt-xs>
-              <label>Telefone</label>
-              <input type="text" name="phone2"  maxlength="11" ng-model="vm.tempData.phone2"/>
-            </md-input-container>
-            <md-input-container class="md-block" flex-gt-xs>
-              <label>Telefone</label>
-              <input type="text" name="phone3"  maxlength="11" ng-model="vm.tempData.phone3"/>
-            </md-input-container>
-          </div>
-        </md-content>
-      </div>
-
-      <div class="md-whiteframe-z1 marginAll16">
-          <md-toolbar class="md-cyan-theme">
-              <div class="md-toolbar-tools">
-                  <h2>Informações complementares</h2>
-              </div>
-          </md-toolbar>
-          <md-content layout-padding ng-cloak>
-            <div layout-gt-xs="row">
-              <md-input-container  class="md-block" flex-gt-xs>
-                <label>Forma de recebimento</label>
-                <md-select ng-model="vm.tempData.receiveType">
-                  <md-option ng-repeat="item in vm.receives" value="{{item.value}}">
-                    {{item.description}}
-                  </md-option>
-                </md-select>
-              </md-input-container>
-              <md-input-container>
-                <label>Data de recebimento</label>
-                <input type="date" mdp-date-picker ng-model="vm.tempData.receiveDate" />
-              </md-input-container>
-            </div>
-          </md-content>
+      <md-toolbar class="md-cyan-theme">
+        <div class="md-toolbar-tools">
+          <h2>Endereço e telefone</h2>
         </div>
+      </md-toolbar>
+      <md-content layout-padding ng-cloak>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>CEP</label>
+            <input ui-br-cep-mask type="text" name="cep" md-maxlength="9" maxlength="9" ng-model="vm.tempData.a_cep"/>
+            <ng-messages for="inputForm.cep.$error">
+              <div ng-show="inputForm.cep.$error.cep">
+                CEP inválido
+              </div>
+            </ng-messages>
+            <ng-messages for="inputForm.cep.$error">
+              <ng-message when="md-maxlength">
+                Não é permitido mais de 9 caracteres
+              </ng-message>
+            </ng-messages>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Logradouro</label>
+            <input type="text" name="place" md-maxlength="100"
+            maxlength="100" ng-model="vm.tempData.a_place" ng-required="vm.addressRequired() && !vm.tempData.a_place"/>
+            <ng-messages for="inputForm.place.$error">
+              <ng-message when="md-maxlength">
+                Não é permitido mais de 100 caracteres
+              </ng-message>
+              <ng-message when="required">
+                O Logradouro é obrigatório
+              </ng-message>
+            </ng-messages>
+          </md-input-container>
+          <md-input-container>
+            <label>Numero</label>
+            <input type="text" name="number" maxlength="6" ng-model="vm.tempData.a_number" ng-required="vm.addressRequired() && !vm.tempData.a_number"/>
+            <ng-messages for="inputForm.number.$error">
+              <ng-message when="required">
+                O Numero é obrigatório
+              </ng-message>
+            </ng-messages>
+          </md-input-container>
+          <md-input-container>
+            <label>Complemento</label>
+            <input type="text" name="complement" maxlength="10" ng-model="vm.tempData.a_complement"/>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Bairro</label>
+            <input type="text" name="neighborhood" maxlength="50" ng-model="vm.tempData.a_neighborhood" ng-required="vm.addressRequired() && !vm.tempData.a_neighborhood"/>
+            <ng-messages for="inputForm.neighborhood.$error">
+              <ng-message when="required">
+                O Bairro é obrigatório
+              </ng-message>
+              <ng-message when="md-maxlength">
+                Não é permitido mais de 50 caracteres
+              </ng-message>
+            </ng-messages>
+          </md-input-container>
+          <md-autocomplete md-input-name="state" md-selected-item="vm.tempData.state" md-search-text="vm.searchTextState"
+            md-items="item in vm.querySearchStates(vm.searchTextState)"
+            md-item-text="item.description"
+            md-selected-item-change="vm.stateItemChange()" md-min-length="0"
+            md-floating-label="Estado" force-select
+            ng-required="vm.addressRequired() && !vm.tempData.state">
+            <md-item-template>
+              <span md-highlight-text="vm.searchTextState" md-highlight-flags="^i">{{item.description}}</span>
+            </md-item-template>
+            <div ng-messages="inputForm.state.$error">
+              <div ng-message="selectValidValue">Selecione um Estado válido</div>
+            </div>
+          </md-autocomplete>
+          <md-autocomplete md-input-name="city" md-selected-item="vm.tempData.city"
+            md-search-text="vm.searchTextCity"
+            md-items="item in vm.querySearchCities(vm.searchTextCity)"
+            md-item-text="item.description" ng-disabled="!vm.tempData.state"
+            md-min-length="0" md-floating-label="Cidade" force-select
+            ng-required="vm.addressRequired() && !vm.tempData.city">
+            <md-item-template>
+              <span md-highlight-text="vm.searchTextCity" md-highlight-flags="^i">{{item.description}}</span>
+            </md-item-template>
+            <div ng-messages="inputForm.city.$error">
+              <div ng-message="selectValidValue">Selecione uma Cidade válida</div>
+            </div>
+          </md-autocomplete>
 
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Telefone</label>
+            <input type="text" name="phone1" maxlength="15" ng-model="vm.tempData.m_phone1" ui-br-phone-number/>
+            <ng-messages for="inputForm.phone1.$error">
+              <div ng-show="inputForm.phone1.$error.brPhoneNumber">
+                Telefone inválido Ex: (DD) 3000-0000 ou (DD) 90000-0000
+              </div>
+            </ng-messages>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Telefone</label>
+            <input type="text" name="phone2" maxlength="15" ng-model="vm.tempData.m_phone2" ui-br-phone-number/>
+            <ng-messages for="inputForm.phone2.$error">
+              <div ng-show="inputForm.phone2.$error.brPhoneNumber">
+                Telefone inválido Ex: (DD) 3000-0000 ou (DD) 90000-0000
+              </div>
+            </ng-messages>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Telefone</label>
+            <input type="text" name="phone3" maxlength="15" ng-model="vm.tempData.m_phone3" ui-br-phone-number/>
+            <ng-messages for="inputForm.phone3.$error">
+              <div ng-show="inputForm.phone3.$error.brPhoneNumber">
+                Telefone inválido Ex: (DD) 3000-0000 ou (DD) 90000-0000
+              </div>
+            </ng-messages>
+          </md-input-container>
+        </div>
+      </md-content>
+    </div>
+
+    <div class="md-whiteframe-z1 marginAll16">
+      <md-toolbar class="md-cyan-theme">
+        <div class="md-toolbar-tools">
+          <h2>Informações complementares</h2>
+        </div>
+      </md-toolbar>
+      <md-content layout-padding ng-cloak>
+        <div layout-gt-xs="row">
+          <md-autocomplete md-input-name="receiveType" md-selected-item="vm.tempData.receiveType" md-search-text="vm.searchTextReceive" md-items="item in vm.querySearchReceiveType(vm.searchTextReceive)" md-item-text="item.description" md-min-length="0" md-floating-label="Forma de recebimento" required force-select class="md-block requiredAsterisk" flex>
+            <md-item-template>
+              <span md-highlight-text="vm.searchTextReceive" md-highlight-flags="^i">{{item.description}}</span>
+            </md-item-template>
+            <ng-messages for="inputForm.receiveType.$error">
+              <ng-message when="selectValidValue">Selecione um Tipo de Recebimento válido</ng-message>
+              <ng-message when="required">O Tipo de Recebimento é obrigatório</ng-message>
+            </ng-messages>
+          </md-autocomplete>
+
+          <md-input-container class="requiredAsterisk">
+            <label>Data de recebimento</label>
+            <input type="date" mdp-date-picker ng-model="vm.tempData.m_receive_date" required/>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row" ng-if="vm.hasSpouse()">
+          <md-autocomplete md-input-name="spouse" md-selected-item="vm.tempData.spouse"
+          md-search-text="vm.searchTextSpouse" md-items="item in vm.querySearchSpouse(vm.searchTextSpouse)" md-item-text="item.name"
+          md-min-length="0" class="md-block requiredAsterisk"
+          md-floating-label="Nome do cônjuge" md-menu-class="autocomplete-custom-template" flex>
+            <md-item-template>
+              <span class="item-title">
+                <span md-highlight-text="vm.searchTextSpouse" md-highlight-flags="^i">{{item.name}}</span>
+              </span>
+              <span class="item-metadata">
+                <span class="item-metastat">
+                  nascimento: <strong>{{item.birthday | date:'dd/MM/yyyy'}}</strong>
+                </span>
+                <span class="item-metastat">
+                  CPF: <strong>{{item.cpf | brCpf}}</strong>
+                </span>
+              </span>
+            </md-item-template>
+            <ng-messages for="inputForm.spouse.$error">
+              <ng-message when="required">
+                O Nome do cônjuge é obrigatório
+              </ng-message>
+            </ng-messages>
+          </md-autocomplete>
+          <md-input-container class="requiredAsterisk">
+            <label>Data de casamento</label>
+            <input type="date" mdp-date-picker name="weddingDate" ng-model="vm.tempData.m_wedding_date" required/>
+            <ng-messages for="inputForm.weddingDate.$error">
+              <ng-message when="required">
+                A data de casamento é obrigatória
+              </ng-message>
+            </ng-messages>
+          </md-input-container>
+        </div>
+      </md-content>
+    </div>
   </form>
 </md-content>

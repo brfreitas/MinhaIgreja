@@ -21,8 +21,19 @@
 		var _ = $window._;
 		delete $window._;
 
+		_.mixin({'objectConverter': objectConverter});
+
 
 		return _;
+
+		function objectConverter(source, mapPropertiesTransform){
+			var output = {};
+			_.forEach(source, function(value, key) {
+				key = mapPropertiesTransform[key] || key;
+    		output[key] = value;
+			});
+			return output;
+		}
 	}
 
 })();

@@ -11,15 +11,15 @@
     var self = this;
     self.onClickMenu = onClickMenu;
     self.title = '';
-    self.changeTitle = changeTitle
+    self.changeTitle = changeTitle;
 
 
     function changeTitle(title) {
         self.title = title;
-    };
+    }
     function onClickMenu() {
         $mdSidenav('left').toggle();
-    };
+    }
 
     self.menu = ssSideNav;
   }

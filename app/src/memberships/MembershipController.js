@@ -10,12 +10,11 @@
   function MembershipController(membershipService, $mdSidenav, $mdBottomSheet, $log, $q, $mdToast, $mdDialo, $state) {
     var self = this;
     self.memberships = [];
+    self.goEdit = goEdit;
 
-    self.goEdit = goEdit
 
-    
 
-    membershipService.loadMemberships().then( function( memberships ) {
+    membershipService.listMemberships().then( function( memberships ) {
       self.memberships = [].concat(memberships);
     });
 

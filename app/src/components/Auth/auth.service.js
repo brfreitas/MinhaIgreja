@@ -20,6 +20,9 @@
 (function () {
 	'use strict';
 
+	var db = require('./src/database/database.js');
+	var crypto = require("crypto");
+
 	// register the service as Auth
 	angular
 		.module('minhaIgrejaApp.auth', [
@@ -59,6 +62,7 @@
 			currentUser = User.get();
 		}
 
+
 		return {
 			login: login,
 			logout: logout,
@@ -93,16 +97,26 @@
 			/* jshint validthis:true */
 			var cb = callback || angular.noop;
 			var deferred = $q.defer();
-			//FIXME: implementar login no banco
-			currentUser = {
-				username: user.name,
-				password: user.password
-			};// = User.get();
-			deferred.resolve({
-				username: user.name,
-				password: user.password
+			db.pool.getConnection(function(err, connection) {
+				var hash = crypto.createHash("md5").update(user.password).digest('hex');
+				var query = 'SELECT * FROM users WHERE username = ? and password = ?';
+				connection.query(query, [user.name, hash], function (err, rows) {
+					connection.release();
+					if (err) deferred.reject(err);
+						if(rows.length){
+							currentUser = rows[0];
+							$cookieStore.put('token', currentUser._id);
+							$cookieStore.remove('customerID');
+							deferred.resolve(currentUser);
+							return cb();
+						}else{
+							err = 'Usuário e/ou senha inválido';
+							logout();
+							deferred.reject(err);
+							return cb(err);
+						}
+				});
 			});
-			//return cb();
 			return deferred.promise;
 		}
 
@@ -117,9 +131,7 @@
 		 *
 		 */
 		function logout() {
-			$cookieStore.remove('token');
-			currentUser = {};
-			$templateCache.removeAll();
+
 			$location.path('/login');
 		}
 

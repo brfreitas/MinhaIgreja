@@ -4,6 +4,8 @@
   "description": "AngularElectron",
   "main": "main.js",
   "dependencies": {
-    "mysql": "2.9.0"
+    "mysql": "^2.10.2",
+    "q": "^1.4.1",
+    "throw": "^1.1.0"
   }
 }

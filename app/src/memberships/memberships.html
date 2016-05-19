@@ -3,11 +3,12 @@
 <md-content class="full-heigth">
   <md-list>
     <md-list-item class="md-3-line" ng-repeat="element in vm.memberships | filter:search">
-        <div class="md-list-item-text">
-            <h3>{{element.name}}</h3>
-        </div>
-        <md-icon aria-label="Editar" class="md-secondary" md-svg-icon="pencil" ng-click="vm.goEdit(element._id)"></md-icon>
-        <md-divider></md-divider>
+      <img ngf-src="element.photo_filename" class="avatar" alt="">
+      <div class="md-list-item-text">
+          <h3>{{element.name}}</h3>
+      </div>
+      <md-icon aria-label="Editar" class="md-secondary" md-svg-icon="pencil" ng-click="vm.goEdit(element._id)"></md-icon>
+      <md-divider></md-divider>
     </md-list-item>
   </md-list>
 </md-content>

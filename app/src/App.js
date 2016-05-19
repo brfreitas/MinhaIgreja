@@ -50,6 +50,7 @@
         })
         .state('app.dashboard', {
           url: "/",
+          authenticate: true,
           views: {
             'mainView': {
               templateUrl: './src/dashboards/dashboard.html',
@@ -61,7 +62,7 @@
         })
         .state('app.memberships', {
           url: "/memberships",
-          authenticate: false,
+          authenticate: true,
           views: {
             'mainView': {
               templateUrl: './src/memberships/memberships.html',
@@ -72,7 +73,7 @@
         })
         .state('app.edit-membership', {
           url: "/memberships/:membershipId",
-          authenticate: false,
+          authenticate: true,
           views: {
             'mainView': {
               templateUrl: './src/memberships/edit/editForm.html',
@@ -112,11 +113,19 @@
     sideBarConfig.$inject = ['$mdThemingProvider', 'ssSideNavSectionsProvider'];
     function sideBarConfig($mdThemingProvider, ssSideNavSectionsProvider) {
       ssSideNavSectionsProvider.initWithTheme($mdThemingProvider);
-      ssSideNavSectionsProvider.initWithSections([{
-        id: 'membership',
-        name: 'Membros',
-        state: 'app.memberships',
-        type: 'link'
-      }]);
+      ssSideNavSectionsProvider.initWithSections([
+        {
+          id: 'membership',
+          name: 'Membros',
+          state: 'app.memberships',
+          type: 'link'
+        },
+        {
+          id: 'logout',
+          name: 'Sair',
+          state: 'login',
+          type: 'link'
+        }
+      ]);
     }
 })();

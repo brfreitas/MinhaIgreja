@@ -12,6 +12,29 @@ body > div {
     overflow: hidden;
 }
 
+img.avatar {
+  margin-right: 20px;
+}
+
+img.avatar {
+  margin-top: 10px;
+}
+
+.avatar {
+  position:relative;
+  width: 54px;
+  height: 54px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0px;
+  vertical-align: middle;
+
+}
+
+
+
 body > div {
     height: 100%;
 }
@@ -89,13 +112,70 @@ body > div {
 .marginAll16 {
     margin: 16px;
 }
-.profilePicThumb{
+.profile-image{
+    cursor:default;
+    position:relative;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    text-decoration:none;
+    z-index:0;
 }
-.profilePic{
-  height: 160px;
-  width: 160px;
-  background-color: #fff;
-  border: 4px solid #fff;
-  border-radius: 2px;
+.profile-image .profile-image-image{
+    margin-top: 0 !important;
+}
+.profile-image .change-text{
+    background:#000;
+    bottom:0;
+    color:#fff;
+    display:none;
+    font-weight:700;
+    height:30px;
+    left:0;
+    line-height:30px;
+    position:absolute;
+    right:0;
+    text-align:center;
+    width:100%;
+    z-index:3;
+    top: 50%;
+    margin-top: -26px;
+}
+.profile-image.ed{
+    cursor:pointer;
+}
 
+.profile-image.ed img{
+  width: 168px;
+  height: 168px;
+}
+
+.profile-image.ed:hover .change-text{
+    display:block;
+    text-decoration:underline;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator{
+    /* Your CSS here */
+    display: none;
+    -webkit-appearance: none;
+}
+input[type="date"]::-webkit-inner-spin-button {
+    /* Your CSS here */
+    display: none;
+    -webkit-appearance: none;
+}
+.autocomplete-custom-template .item-title, .autocomplete-custom-template .item-metadata {
+    display: block;
+    line-height: 2;
+}
+
+md-input-container.requiredAsterisk label:after,
+div.requiredAsterisk label:after,  
+md-autocomplete.requiredAsterisk label:after{
+  color: red;
+  content:"*";
 }
