@@ -62,6 +62,7 @@
         })
         .state('app.memberships', {
           url: "/memberships",
+          params : { toastMessage: null, },
           authenticate: true,
           views: {
             'mainView': {

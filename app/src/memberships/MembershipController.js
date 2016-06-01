@@ -3,14 +3,15 @@
   angular
        .module('memberships')
        .controller('MembershipController', [
-          'membershipService','$mdSidenav', '$mdBottomSheet', '$log', '$q', '$mdToast', '$mdDialog', '$state',
+          'membershipService','$mdSidenav', '$mdBottomSheet', '$log', '$q', '$mdToast', '$stateParams', '$mdDialog', '$state',
           MembershipController
        ]);
 
-  function MembershipController(membershipService, $mdSidenav, $mdBottomSheet, $log, $q, $mdToast, $mdDialo, $state) {
+  function MembershipController(membershipService, $mdSidenav, $mdBottomSheet, $log, $q, $mdToast, $stateParams, $mdDialog, $state) {
     var self = this;
     self.memberships = [];
     self.goEdit = goEdit;
+    self.toastMessage = $stateParams.toastMessage;
 
 
 
@@ -22,6 +23,18 @@
       $state.go('app.edit-membership',{'membershipId':id});
     }
 
+    if(self.toastMessage!==null){
+      showToast(self.toastMessage);
+    }
+
+    function showToast(msg){
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent(msg)
+          .position("bottom right")
+          .hideDelay(3000)
+        );
+    }
 
 
 

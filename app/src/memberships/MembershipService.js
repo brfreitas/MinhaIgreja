@@ -149,7 +149,7 @@
         var newPath = __dirname+ '/' + relativePath;
         fs.readFile(membership.picFile.path, function (err, data) {
           fs.writeFile(newPath, data, function (err) {
-            connection.query('UPDATE memberships SET photo_filename=? WHERE person_id=?', [newPath, membership.p_id], function(err, resultUpdate) {
+            connection.query('UPDATE memberships SET photo_filename=? WHERE person_id=?', [relativePath, membership.p_id], function(err, resultUpdate) {
               if (err) {
                 return connection.rollback(function() {
                   connection.release();
@@ -181,8 +181,6 @@
               });
             }
 
-            //var log = 'Post ' + resultPersons.insertId + ' added';
-            membership.p_id = resultPersons.insertId;
             var membershipSql = getMembershipSql(membership, true);
             connection.query(membershipSql.sql, membershipSql.values, function(err, resultMembership) {
               if (err) {
@@ -284,7 +282,7 @@
       if(update){
         personArrValues.push(membership.p_id);
       }
-       var finalSql = update ? personSql +personSqlColumns+'WHERE _id = ?' : personSql+personSqlColumns+') '+personSqlValues+')';
+       var finalSql = update ? personSql +personSqlColumns+' WHERE _id = ?' : personSql+personSqlColumns+') '+personSqlValues+')';
 
       return {
         sql: finalSql,
@@ -360,7 +358,7 @@
       if(update){
         membershipArrValues.push(membership.p_id);
       }
-      var finalSql = update ? membershipSql + membershipSqlColumns+'WHERE person_id = ?' : membershipSql+membershipSqlColumns+') '+membershipSqlValues+')';
+      var finalSql = update ? membershipSql + membershipSqlColumns+' WHERE person_id = ?' : membershipSql+membershipSqlColumns+') '+membershipSqlValues+')';
       return {
         sql: finalSql,
         values: membershipArrValues
@@ -420,15 +418,7 @@
         addressSqlValues += ',?';
       }
       addressArrValues.push(membership.a_neighborhood);
-      //cep
-      if(update){
-        addressSqlColumns += ', cep = ?';
-      } else{
-        addressSqlColumns += ', cep';
-        addressSqlValues += ',?';
-        addressArrValues.push(membership.a_cep);
-      }
-      //cep
+      //city
       if(update){
         addressSqlColumns += ', city_id=?';
       }else{
@@ -436,7 +426,7 @@
         addressSqlValues += ',?';
         addressArrValues.push(membership.city.value);
       }
-      var finalSql = update ? addressSql + addressSqlColumns + 'WHERE person_id = ?' : membershipSql+addressSqlColumns+') '+addressArrValues+')';
+      var finalSql = update ? addressSql + addressSqlColumns + ' WHERE person_id = ?' : addressSql + addressSqlColumns + ') ' + addressSqlValues + ')';
       return {
         sql: finalSql,
         values: addressArrValues

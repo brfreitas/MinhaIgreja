@@ -72,6 +72,12 @@
             self.searchTextSpouse = self.tempData.m_spouse_name;
           }
         }
+        if(self.tempData.c_id !== null){
+          self.tempData.city = {"value": self.tempData.c_id, "description": self.tempData.c_name};
+        }
+        if(self.tempData.s_id !== null){
+          self.tempData.state = {"value": self.tempData.s_id, "description": self.tempData.s_name};
+        }
         if(!self.tempData.m_photo_filename){
           self.tempData.picFile = "assets/images/foto.png";
         }else{
@@ -154,19 +160,11 @@
       }
     }
 
-    function loadCitiesPerState(state){
-      /*lookupService.listCities(state).then(function( cities ) {
-        self.cities = cities;
-      });*/
-    }
-
     function querySearch(query, list) {
       var results = query ? list.filter( createFilterFor(query) ) : list;
       return results;
 
     }
-
-
 
     function createFilterForDependent(query, depItem) {
       var lowercaseQuery = angular.lowercase(query);
@@ -184,9 +182,6 @@
     function back() {
         $state.go('app.memberships');
     }
-
-
-
 
     function fileSelected($files, $file, $event, $rejectedFiles){
       if(!$file){
@@ -274,7 +269,7 @@
     }
 
     function insertSuccess(){
-      showToast('Membro cadastrado com sucesso!');
+      goList('Membro cadastrado com sucesso!');
     }
 
     function insertError(){
@@ -292,10 +287,10 @@
 
     //Permite modificar un registro
     function update() {
-      membershipService.updateMembership(self.tempData, updateSuccess, updateError);      
+      membershipService.updateMembership(self.tempData, updateSuccess, updateError);
     }
     function updateSuccess(){
-      showToast('Membro alterado com sucesso!');
+      goList('Membro alterado com sucesso!');
     }
 
     function updateError(){
@@ -305,6 +300,10 @@
 
     function mostrarError(msg) {
       simpleToastBase(msg, 'bottom right', 6000, 'X');
+    }
+
+    function goList(msg) {
+      $state.go('app.memberships',{'toastMessage':msg});
     }
 
   }
