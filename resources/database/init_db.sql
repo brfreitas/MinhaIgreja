@@ -9410,3 +9410,8 @@ INSERT INTO `cities` VALUES(9386, 'Tupirata', 27);
 INSERT INTO `cities` VALUES(9387, 'Tupiratins', 27);
 INSERT INTO `cities` VALUES(9388, 'Venus', 27);
 INSERT INTO `cities` VALUES(9389, 'Wanderlandia', 27);
+
+INSERT INTO `igreja`.`marital_status` (`description`) VALUES ('Solteiro');
+INSERT INTO `igreja`.`marital_status` (`description`) VALUES ('Casado');
+INSERT INTO `igreja`.`marital_status` (`description`) VALUES ('Divorsiado');
+INSERT INTO `igreja`.`marital_status` (`description`) VALUES ('Viuvo');
